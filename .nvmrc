@@ -1,0 +1,5 @@
+echo "20" > .nvmrc
+
+cd api
+echo "20" > .nvmrc
+cd ..
