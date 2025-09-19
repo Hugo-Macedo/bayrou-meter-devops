@@ -25,7 +25,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+  <ClerkProvider
+    publishableKey={PUBLISHABLE_KEY}
+    clerkJSUrl="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
+    clerkJSVersion="5"
+  >
     <RouterProvider router={router} />
   </ClerkProvider>
 );
