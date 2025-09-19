@@ -9,6 +9,10 @@ import "./index.css";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
+if (import.meta.env.PROD) {
+  console.log("Clerk publishable key (prefix):", (PUBLISHABLE_KEY || "").slice(0, 10));
+}
+
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
