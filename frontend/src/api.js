@@ -1,4 +1,5 @@
-const API_BASE = import.meta.env.VITE_API_BASE || ""; // vide = même domaine (SWA)
+const API_BASE = import.meta.env.VITE_API_BASE || "";
+
 async function jsonFetch(url, options = {}) {
   const res = await fetch(API_BASE + url, {
     headers: { "Content-Type": "application/json", ...(options.headers || {}) },
@@ -6,9 +7,7 @@ async function jsonFetch(url, options = {}) {
   });
   const text = await res.text();
   const data = text ? JSON.parse(text) : null;
-  if (!res.ok) {
-    throw new Error(data?.error || `HTTP ${res.status}`);
-  }
+  if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
   return data;
 }
 
