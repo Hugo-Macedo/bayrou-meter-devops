@@ -1,17 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ClerkProvider } from "@clerk/clerk-react";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import { AuthProvider } from "./auth";   // 👈 importe ton AuthProvider
 import Login from "./routes/Login.jsx";
 import Home from "./routes/Home.jsx";
 import RootLayout from "./components/RootLayout.jsx";
 import "./index.css";
-
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (import.meta.env.PROD) {
-  console.log("Clerk publishable key (prefix):", (PUBLISHABLE_KEY || "").slice(0, 10));
-}
 
 const router = createBrowserRouter([
   {
@@ -25,11 +19,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ClerkProvider
-    publishableKey={PUBLISHABLE_KEY}
-    clerkJSUrl="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
-    clerkJSVersion="5"
-  >
+  <AuthProvider>
     <RouterProvider router={router} />
-  </ClerkProvider>
+  </AuthProvider>
 );
