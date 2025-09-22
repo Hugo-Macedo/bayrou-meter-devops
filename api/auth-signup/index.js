@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { v4: uuid } = require("uuid");
+const { randomUUID } = require("crypto");
 const { containers } = require("../shared/cosmosClient");
 
 const SECRET = process.env.AUTH_JWT_SECRET;
@@ -22,7 +22,7 @@ module.exports = async function (context, req) {
       return;
     }
 
-    const user = { id: uuid(), pseudo, email, createdAt: new Date().toISOString(), type: "user" };
+    const user = { id: randomUUID(), pseudo, email, createdAt: new Date().toISOString(), type: "user" };
     await users.items.create(user);
 
     const token = jwt.sign({ sub: user.id, email: user.email, pseudo: user.pseudo }, SECRET, { expiresIn: "7d" });

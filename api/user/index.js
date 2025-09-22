@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require("uuid");
+const { randomUUID } = require("crypto");
 const { z } = require("zod");
 const { containers } = require("../shared/cosmosClient");
 
@@ -36,7 +36,7 @@ module.exports = async function (context, req) {
 
     const now = new Date().toISOString();
     const user = {
-      id: uuidv4(),
+      id: randomUUID(),
       pseudo,
       email: email.toLowerCase(),
       createdAt: now,
