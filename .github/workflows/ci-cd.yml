@@ -18,7 +18,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install api deps
+        working-directory: ./api
         run: npm ci
 
       - name: Run unit tests
